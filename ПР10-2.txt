@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+class AnalogControl {
+  private:
+    bool is_on;
+    int value;
+    int max_value;
+    int min_value;
+
+  public:
+    AnalogControl(int max_v = 100, int min_v = 0) {
+      is_on = false;
+      value = 0;
+      max_value = max_v;
+      min_value = min_v;
+    }
+
+    bool get_is_on() {
+      return is_on;
+    }
+
+    void turn_on() {
+      is_on = true;
+    }
+
+    void turn_off() {
+      is_on = false;
+    }
+
+    int get_value() {
+      return value;
+    }
+
+    void set_value(int v) {
+      if (v >= min_value && v <= max_value) {
+        value = v;
+      } else if (v < min_value) {
+        value = min_value;
+      } else {
+        value = max_value;
+      }
+    }
+};
+
+int main() {
+  AnalogControl ac(50, 10);
+  cout << "Is on: " << ac.get_is_on() << endl;
+  ac.turn_on();
+  cout << "Is on: " << ac.get_is_on() << endl;
+  cout << "Значение: " << ac.get_value() << endl;
+  ac.set_value(75);
+  cout << "Значение: " << ac.get_value() << endl;
+  ac.set_value(5);
+  cout << "Значение: " << ac.get_value() << endl;
+  ac.turn_off();
+  cout << "Is on: " << ac.get_is_on() << endl;
+
+  return 0;
+}
